@@ -21,7 +21,7 @@ There are 2 types of tests in the project
    
    `mvn clean test`
    
-2. Browserstack based tests
+2. Browserstack based tests:
    
    These tests are executed remotely on browserstack. They cannot be executed through maven.
    
