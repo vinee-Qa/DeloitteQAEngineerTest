@@ -26,6 +26,7 @@ There are 2 types of tests in the project
    1. On Windows
       
       `setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"`
+      
       `setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"      `
    2. On Linux/Mac OS
       
