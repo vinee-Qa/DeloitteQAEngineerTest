@@ -10,6 +10,13 @@ There are 2 types of tests in the project
 1. local tests:
    
    These tests can be run through maven and located in the src/test folder inside the package `com.deloitte.test.maven`
+   
+   #### Browsers Covered
+    * Google Chrome
+    * Mozilla Firefox
+    * Microsoft Edge
+    
+   #### How to execute 
    To execute these tests please navigate to the project root and run the following command
    
    `mvn clean test`
