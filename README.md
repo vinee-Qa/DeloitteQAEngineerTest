@@ -22,18 +22,24 @@ There are 2 types of tests in the project
    `mvn clean test`
    
 2. Browserstack based tests
-    These tests are run remotely on browserstack and require the following parameters to be set
+   
+   These tests are executed remotely on browserstack. They cannot be executed through maven.
+   
+   #### Pre-requisites 
+   
+    To execute these test cases, two environment variables need to be set as shown below:
+   
    1. On Windows
       
       `setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"`
       
-      `setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"      `
+      `setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
+      `
    2. On Linux/Mac OS
       
-      `
-      export BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"
-      export BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
-      `  
+      `export BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"`
+      
+      `export BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"      `  
 
 ### Browsers Covered
 * Google Chrome
