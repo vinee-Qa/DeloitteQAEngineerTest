@@ -17,7 +17,7 @@ There are 2 types of tests in the project
     * Microsoft Edge
     
    #### How to execute 
-   To execute these tests please navigate to the project root and run the following command
+   To execute these tests please navigate to the project root and run the following command:
    
    `mvn clean test`
    
@@ -27,6 +27,7 @@ There are 2 types of tests in the project
       
       `
       setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"
+      
       setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
       `
    2. On Linux/Mac OS
