@@ -3,6 +3,7 @@ Author: Vineeta Chaudhary (vineeta984@gmail.com)
 ### Tools used
 * Maven Version 3.8.1 64bit
 * Java 8
+* Browser Stack
 
 ### Browsers Covered
 * Google Chrome
