@@ -39,12 +39,14 @@ There are 2 types of tests in the project
       
       `export BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"`
       
-      `export BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"      `  
-
-### Browsers Covered
-* Google Chrome
-* Mozilla Firefox
-* Microsoft Edge
+      `export BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"`
+    
+   #### Browsers Covered
+    * Google Chrome
+    * Mozilla Firefox
+    * Microsoft Edge
 
 ### Uncovered scenerios
-No test cases have been run on mobile browsers as my laptop specs do not support Android Studio
+No test cases have been run on mobile browsers due to following reasons:
+1. My laptop does not support Android Studio
+2. I am not very well versed with CloudStack
