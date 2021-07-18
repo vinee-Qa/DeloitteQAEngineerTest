@@ -25,11 +25,8 @@ There are 2 types of tests in the project
     These tests are run remotely on browserstack and require the following parameters to be set
    1. On Windows
       
-      `
-      setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"
-      
-      setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
-      `
+      `setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"`
+      `setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"      `
    2. On Linux/Mac OS
       
       `
