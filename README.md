@@ -10,15 +10,19 @@ There are 2 types of tests in the project
 1. local tests 
    These tests can be run through maven and located in the src/test folder inside the package `com.deloitte.test.maven`
    To execute these tests please navigate to the project root and run the following command
+   
    `mvn clean test`
+   
 2. Browserstack based tests
     These tests are run remotely on browserstack and require the following parameters to be set
    1. On Windows
+      
       `
       setx BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"
       setx BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
       `
    2. On Linux/Mac OS
+      
       `
       export BROWSERSTACK_USERNAME = "<Your BrowserStack UserName>"
       export BROWSERSTACK_ACCESS_KEY = "<Your BrowserStack Access Key>"
