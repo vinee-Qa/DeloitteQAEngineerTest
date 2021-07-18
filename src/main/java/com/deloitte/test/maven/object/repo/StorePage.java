@@ -1,4 +1,4 @@
-package com.deloitte.test.object.repo;
+package com.deloitte.test.maven.object.repo;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
