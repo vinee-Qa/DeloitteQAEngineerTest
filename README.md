@@ -45,6 +45,16 @@ There are 2 types of tests in the project
     * Google Chrome
     * Mozilla Firefox
     * Microsoft Edge
+    * Safari
+    
+   #### How to execute
+    To execute test cases in a single web browser (currently setup as Chrome) execute the following steps:
+   
+    1. Set up the environment variables as highlighted in pre-requisites section.
+    2. Open the project in an IDE such as IntelliJ.
+    3. Navigate to `config` folder
+    4. To run test cases in a single browser (defaults to Chrome), right click on `single.testng.xml` and select `run`
+    5. To run tests cases in parallel on multiple browsers, right click on `parallel.testng.xml` and select `run`
 
 ### Uncovered scenerios
 No test cases have been run on mobile browsers due to following reasons:
