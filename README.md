@@ -7,7 +7,8 @@ Author: Vineeta Chaudhary (vineeta984@gmail.com)
 
 ## Types of Test
 There are 2 types of tests in the project
-1. local tests 
+1. local tests:
+   
    These tests can be run through maven and located in the src/test folder inside the package `com.deloitte.test.maven`
    To execute these tests please navigate to the project root and run the following command
    
