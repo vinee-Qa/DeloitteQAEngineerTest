@@ -5,7 +5,7 @@
         <parameter name="config" value="parallel.conf.json"/>
         <parameter name="environment" value="env1"/>
         <classes>
-            <class name="com.browserstack.SingleTest"/>
+            <class name="com.deloitte.test.browserstack.AddToCartTests"/>
         </classes>
     </test>
 
@@ -13,7 +13,7 @@
         <parameter name="config" value="parallel.conf.json"/>
         <parameter name="environment" value="env2"/>
         <classes>
-            <class name="com.browserstack.SingleTest"/>
+            <class name="com.deloitte.test.browserstack.AddToCartTests"/>
         </classes>
     </test>
 
@@ -21,7 +21,7 @@
         <parameter name="config" value="parallel.conf.json"/>
         <parameter name="environment" value="env3"/>
         <classes>
-            <class name="com.browserstack.SingleTest"/>
+            <class name="com.deloitte.test.browserstack.AddToCartTests"/>
         </classes>
     </test>
 </suite>

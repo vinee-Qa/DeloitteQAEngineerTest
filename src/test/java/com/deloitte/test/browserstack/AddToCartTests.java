@@ -12,36 +12,13 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import java.io.IOException;
-
-public class AddToCartTestsBrowserStackVC {
-    public WebDriver driver;
-
-    @BeforeTest
-    public void setup() {
-        String USERNAME = System.getenv("BROWSERSTACK_USERNAME");
-        String AUTOMATE_KEY = System.getenv("BROWSERSTACK_ACCESS_KEY");
-        final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
-
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("os", "Windows");
-        caps.setCapability("os_version", "10");
-        caps.setCapability("browser", "Chrome");
-        caps.setCapability("browser_version", "80");
-        caps.setCapability("name", "Vineeta's First Test for Deloitte");
-
-        try {
-            driver = new RemoteWebDriver(new URL(URL), caps);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
-    @Test
+public class AddToCartTests extends BrowserStackTestNGTest {
+       @Test
     public void verifyAddingSingleProductToCart() throws IOException {
-
         driver.get("https://react-shooping-cart.netlify.app/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
@@ -126,10 +103,5 @@ public class AddToCartTestsBrowserStackVC {
         //check cart is clear
         String clearCart = cart.getEmptyCart().getText().trim();
         assert (clearCart.equalsIgnoreCase("Your cart is empty"));
-    }
-
-    @AfterTest(alwaysRun = true)
-    public void shutdownDriver() {
-        driver.quit();
     }
 }

@@ -4,8 +4,8 @@
   "key": "5A7mSQbhTvbz45s7uspj",
 
   "capabilities": {
-    "build": "testng-browserstack",
-    "name": "single_test",
+    "build": "VineetaSingleTest",
+    "name": "AddToCartTestsSingle",
     "browserstack.debug": true
   },
 
