@@ -23,7 +23,8 @@ There are 2 types of tests in the project
    
 2. Browserstack based tests:
    
-   These tests are executed remotely on browserstack. They cannot be executed through maven.
+   These tests are executed remotely on browserstack. They cannot be executed through maven. 
+   The results can be viewed on BrowserStack Dashboard.
    
    #### Pre-requisites 
    
