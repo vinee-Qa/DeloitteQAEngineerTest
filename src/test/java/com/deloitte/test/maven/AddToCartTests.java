@@ -15,8 +15,7 @@ public class AddToCartTests extends Base {
     public WebDriver driver;
 
     @Test
-    public void verifyAddingSingleProductToCart() throws IOException {
-
+    public void verifyAddedProductPresentInCart() throws IOException {
         driver = initialiseBrowser();
         driver.get("https://react-shooping-cart.netlify.app/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -27,82 +26,114 @@ public class AddToCartTests extends Base {
         sp.goToCart().click();
         CartPage cart = new CartPage(driver);
         String addedProduct = cart.getProductName().getText().trim();
-
-        //verify if added product is showing up in the cart
-        assert(addedProduct.equalsIgnoreCase("Sour Puss Raspberry"));
-
-        //check total items value
-        cart.getTotalItems().isDisplayed();
-        String totalItemsValue = cart.getTotalItems().getText().trim();
-
-        //check total payments value
-        cart.getTotalPayments().isDisplayed();
-        assert(totalItemsValue.equalsIgnoreCase("1"));
-        cart.getClearButton().click();
-        String emptyCartText = cart.getEmptyCart().getText().trim();
-
-        //verify cart is empty
-        assert(emptyCartText.equalsIgnoreCase("Your cart is empty"));
+        assert (addedProduct.equalsIgnoreCase("Sour Puss Raspberry"));
         driver.quit();
     }
 
     @Test
-    public void verifyAddingMultipleProductsToCart() throws IOException {
+    public void verifyTotalPaymentsAndItemsPresentInCart() throws IOException {
         driver = initialiseBrowser();
         driver.get("https://react-shooping-cart.netlify.app/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
         StorePage sp = new StorePage(driver);
-
-        //add a product to cart
         sp.addToCartButton().click();
-
-        //scroll up
         js.executeScript("window.scrollBy(0,-1000)");
+        sp.goToCart().click();
+        CartPage cart = new CartPage(driver);
+        cart.getTotalItems().isDisplayed();
+        String totalItemsValue = cart.getTotalItems().getText().trim();
+        cart.getTotalPayments().isDisplayed();
+        assert (totalItemsValue.equalsIgnoreCase("1"));
+        driver.quit();
+    }
 
-        //Add a new product to cart
+    @Test
+    public void verifyClearFunctionaltyInCart() throws IOException {
+        driver = initialiseBrowser();
+        driver.get("https://react-shooping-cart.netlify.app/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        StorePage sp = new StorePage(driver);
+        sp.addToCartButton().click();
+        js.executeScript("window.scrollBy(0,-1000)");
+        sp.goToCart().click();
+        CartPage cart = new CartPage(driver);
+        cart.getClearButton().click();
+        String emptyCartText = cart.getEmptyCart().getText().trim();
+        assert (emptyCartText.equalsIgnoreCase("Your cart is empty"));
+        driver.quit();
+    }
+    @Test
+    public void verifyIncreasingQuantityInCart() throws IOException {
+        driver = initialiseBrowser();
+        driver.get("https://react-shooping-cart.netlify.app/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        StorePage sp = new StorePage(driver);
+        sp.addToCartButton().click();
+        js.executeScript("window.scrollBy(0,-1000)");
         sp.addNewProduct().click();
         sp.goToCart().click();
         CartPage cart = new CartPage(driver);
-
-        // increase quantity of first product by 3 times
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             cart.getIncreaseIcon().click();
         }
-
         String totalItemsValue = cart.getTotalItems().getText();
-
-        //Total Number of product becomes 5
-        assert(totalItemsValue.equalsIgnoreCase("5"));
+        assert (totalItemsValue.equalsIgnoreCase("5"));
+        driver.quit();
+    }
+    @Test
+    public void verifyDecreasingQuantityAndCheckout() throws IOException {
+        driver = initialiseBrowser();
+        driver.get("https://react-shooping-cart.netlify.app/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        StorePage sp = new StorePage(driver);
+        sp.addToCartButton().click();
+        js.executeScript("window.scrollBy(0,-1000)");
+        sp.addNewProduct().click();
+        sp.goToCart().click();
+        CartPage cart = new CartPage(driver);
         cart.getTotalPayments().isDisplayed();
         cart.getReduceIcon().isDisplayed();
         cart.getdeleteIcon().isDisplayed();
-
-        //decrease quantity by 2
-        for(int i = 0; i < 2; i++) {
-            cart.getReduceIcon().click();
+        for (int i = 0; i < 3; i++) {
+            cart.getIncreaseIcon().click();
         }
-
-        WebDriverWait wait = new WebDriverWait(driver,20);
+        String totalItemsValue = cart.getTotalItems().getText();
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(cart.getdeleteIcon()));
-
-        // delete the second product
         cart.getdeleteIcon().click();
-
-        //check if first product is removed
-        cart.getProductName().isDisplayed();
-
-        wait.until(ExpectedConditions.elementToBeClickable(cart.getCheckoutButton()));
-        //click checkout button
         cart.getCheckoutButton().click();
-
-        //check checkout success message displays
         String successMessage = cart.getCheckoutSuccessMessage().getText().trim();
-        assert(successMessage.equalsIgnoreCase("Checkout successfull"));
+        assert (successMessage.equalsIgnoreCase("Checkout successfull"));
+        driver.quit();
+    }
 
-        //check cart is clear
+    @Test
+    public void verifyClearFunctionlity() throws IOException {
+        driver = initialiseBrowser();
+        driver.get("https://react-shooping-cart.netlify.app/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        StorePage sp = new StorePage(driver);
+        sp.addToCartButton().click();
+        js.executeScript("window.scrollBy(0,-1000)");
+        sp.addNewProduct().click();
+        sp.goToCart().click();
+        CartPage cart = new CartPage(driver);
+        for (int i = 0; i < 3; i++) {
+            cart.getIncreaseIcon().click();
+        }
+        String totalItemsValue = cart.getTotalItems().getText();
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        wait.until(ExpectedConditions.elementToBeClickable(cart.getdeleteIcon()));
+        cart.getdeleteIcon().click();
+        cart.getCheckoutButton().click();
+        String successMessage = cart.getCheckoutSuccessMessage().getText().trim();
         String clearCart = cart.getEmptyCart().getText().trim();
-        assert(clearCart.equalsIgnoreCase("Your cart is empty"));
+        assert (clearCart.equalsIgnoreCase("Your cart is empty"));
         driver.quit();
     }
 }
