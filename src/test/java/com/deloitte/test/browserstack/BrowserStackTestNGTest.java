@@ -3,6 +3,7 @@ package com.deloitte.test.browserstack;
 import com.browserstack.local.Local;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -20,8 +21,9 @@ import java.util.Map;
 public class BrowserStackTestNGTest {
     public WebDriver driver;
     private Local l;
+    public JavascriptExecutor js;
 
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     @org.testng.annotations.Parameters(value = { "config", "environment" })
     @SuppressWarnings("unchecked")
     public void setUp(String config_file, String environment) throws Exception {
@@ -66,14 +68,27 @@ public class BrowserStackTestNGTest {
         }
 
         driver = new RemoteWebDriver(
-                new URL("https://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"), capabilities);
+                new URL(
+                        "https://" + username + ":" + accessKey + "@" + config.get("server") + "/wd/hub"),
+                capabilities);
+        js = (JavascriptExecutor) driver;
     }
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
         if (l != null) {
             l.stop();
+        }
+    }
+
+    public void setTestStatus(boolean condition) {
+        // Setting the status of test as 'passed' or 'failed' based on the condition
+        if (condition) {
+            js.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\": \"passed\", \"reason\": \"Title matched!\"}}");
+        }
+        else {
+            js.executeScript("browserstack_executor: {\"action\": \"setSessionStatus\", \"arguments\": {\"status\":\"failed\", \"reason\": \"Title not matched\"}}");
         }
     }
 }
