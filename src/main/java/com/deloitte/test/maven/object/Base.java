@@ -1,4 +1,4 @@
-package com.deloitte.test.object;
+package com.deloitte.test.maven.object;
 
 import java.io.FileInputStream;
 import java.io.IOException;

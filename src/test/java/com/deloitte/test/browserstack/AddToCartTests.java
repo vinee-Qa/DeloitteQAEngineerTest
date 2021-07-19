@@ -1,23 +1,24 @@
-package com.deloitte.test;
-import java.io.IOException;
+package com.deloitte.test.browserstack;
 
+import com.deloitte.test.maven.object.repo.CartPage;
+import com.deloitte.test.maven.object.repo.StorePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import com.deloitte.test.object.Base;
-import com.deloitte.test.object.repo.CartPage;
-import com.deloitte.test.object.repo.StorePage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-public class AddToCartTests extends Base {
-    public WebDriver driver;
-
-    @Test
+public class AddToCartTests extends BrowserStackTestNGTest {
+       @Test
     public void verifyAddingSingleProductToCart() throws IOException {
-
-        driver = initialiseBrowser();
         driver.get("https://react-shooping-cart.netlify.app/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
@@ -29,7 +30,7 @@ public class AddToCartTests extends Base {
         String addedProduct = cart.getProductName().getText().trim();
 
         //verify if added product is showing up in the cart
-        assert(addedProduct.equalsIgnoreCase("Sour Puss Raspberry"));
+        assert (addedProduct.equalsIgnoreCase("Sour Puss Raspberry"));
 
         //check total items value
         cart.getTotalItems().isDisplayed();
@@ -37,18 +38,17 @@ public class AddToCartTests extends Base {
 
         //check total payments value
         cart.getTotalPayments().isDisplayed();
-        assert(totalItemsValue.equalsIgnoreCase("1"));
+        assert (totalItemsValue.equalsIgnoreCase("1"));
         cart.getClearButton().click();
         String emptyCartText = cart.getEmptyCart().getText().trim();
 
         //verify cart is empty
-        assert(emptyCartText.equalsIgnoreCase("Your cart is empty"));
-        driver.quit();
+        assert (emptyCartText.equalsIgnoreCase("Your cart is empty"));
     }
 
     @Test
     public void verifyAddingMultipleProductsToCart() throws IOException {
-        driver = initialiseBrowser();
+
         driver.get("https://react-shooping-cart.netlify.app/");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
@@ -66,24 +66,24 @@ public class AddToCartTests extends Base {
         CartPage cart = new CartPage(driver);
 
         // increase quantity of first product by 3 times
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             cart.getIncreaseIcon().click();
         }
 
         String totalItemsValue = cart.getTotalItems().getText();
 
         //Total Number of product becomes 5
-        assert(totalItemsValue.equalsIgnoreCase("5"));
+        assert (totalItemsValue.equalsIgnoreCase("5"));
         cart.getTotalPayments().isDisplayed();
         cart.getReduceIcon().isDisplayed();
         cart.getdeleteIcon().isDisplayed();
 
         //decrease quantity by 2
-        for(int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++) {
             cart.getReduceIcon().click();
         }
 
-        WebDriverWait wait = new WebDriverWait(driver,20);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.elementToBeClickable(cart.getdeleteIcon()));
 
         // delete the second product
@@ -98,12 +98,10 @@ public class AddToCartTests extends Base {
 
         //check checkout success message displays
         String successMessage = cart.getCheckoutSuccessMessage().getText().trim();
-        assert(successMessage.equalsIgnoreCase("Checkout successfull"));
+        assert (successMessage.equalsIgnoreCase("Checkout successfull"));
 
         //check cart is clear
         String clearCart = cart.getEmptyCart().getText().trim();
-        assert(clearCart.equalsIgnoreCase("Your cart is empty"));
-        driver.quit();
+        assert (clearCart.equalsIgnoreCase("Your cart is empty"));
     }
 }
-
